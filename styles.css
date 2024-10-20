@@ -1,55 +1,97 @@
-// Vacation start and end dates
-const startDate = new Date('2024-10-15T16:00:00');
-const endDate = new Date('2024-10-25T08:00:00');
-
-// Function to calculate the time difference and update the timer
-function updateTimer() {
-    const now = new Date();
-    const totalTime = endDate - startDate;
-    const timeElapsed = now - startDate;
-
-    if (now >= endDate) {
-        document.getElementById('vacation-status').textContent = "Vacation has ended!";
-        document.getElementById('circle-progress').style.transform = 'rotate(180deg)';
-        clearInterval(interval);
-        return;
-    } else if (now < startDate) {
-        document.getElementById('vacation-status').textContent = "Vacation hasn't started yet!";
-        document.getElementById('circle-progress').style.transform = 'rotate(0deg)';
-        return;
-    }
-
-    const timeRemaining = endDate - now;
-
-    // Calculate remaining days, hours, minutes, and seconds
-    const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-    // Calculate time passed
-    const hoursPassed = Math.floor(timeElapsed / (1000 * 60 * 60));
-    const minutesPassed = Math.floor((timeElapsed % (1000 * 60 * 60)) / (1000 * 60));
-
-    // Update HTML
-    document.getElementById('days').textContent = days;
-    document.getElementById('hours').textContent = hours;
-    document.getElementById('minutes').textContent = minutes;
-    document.getElementById('seconds').textContent = seconds;
-    document.getElementById('time-passed').textContent = `${hoursPassed} hours, ${minutesPassed} minutes`;
-    document.getElementById('time-remaining').textContent = `${Math.floor(timeRemaining / (1000 * 60 * 60))} hours, ${Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60))} minutes`;
-
-    // Update percentage
-    const progressPercentage = ((timeElapsed / totalTime) * 100).toFixed(2);
-    document.getElementById('percentage').textContent = `${progressPercentage}%`;
-    
-    // Update circular progress bar rotation
-    const rotation = (360 * timeElapsed) / totalTime;
-    document.getElementById('circle-progress').style.transform = `rotate(${rotation}deg)`;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-// Update the timer every second
-const interval = setInterval(updateTimer, 1000);
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #4e54c8, #8f94fb);
+}
 
-// Initial call
-updateTimer();
+.container {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    width: 360px; /* Slightly wider */
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+}
+
+.circle-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.circle {
+    position: relative;
+    width: 240px; /* Increased size */
+    height: 240px;
+    border-radius: 50%;
+    background: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle-progress {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    clip: rect(0px, 240px, 240px, 120px); /* Half circle clipping */
+    background: green;
+    transform: rotate(0deg); /* Start with 0 degrees rotation */
+    transition: transform 1s linear;
+}
+
+.circle-content {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.circle-content div {
+    margin: 5px 0;
+}
+
+.extra-info div {
+    font-size: 1.1rem;
+    color: #777;
+    margin-top: 10px;
+}
+
+#vacation-status {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+span {
+    font-weight: bold;
+    color: #222;
+}
