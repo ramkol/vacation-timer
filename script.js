@@ -10,7 +10,7 @@ function updateTimer() {
 
     if (now >= endDate) {
         document.getElementById('vacation-status').textContent = "Vacation has ended!";
-        document.getElementById('circle-progress').style.transform = 'rotate(360deg)';
+        document.getElementById('circle-progress').style.transform = 'rotate(180deg)';
         clearInterval(interval);
         return;
     } else if (now < startDate) {
@@ -39,21 +39,13 @@ function updateTimer() {
     document.getElementById('time-passed').textContent = `${hoursPassed} hours, ${minutesPassed} minutes`;
     document.getElementById('time-remaining').textContent = `${Math.floor(timeRemaining / (1000 * 60 * 60))} hours, ${Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60))} minutes`;
 
-    // Update percentage
-    const progressPercentage = ((timeElapsed / totalTime) * 100).toFixed(2);
+    // Update percentage with 3 decimal precision
+    const progressPercentage = ((timeElapsed / totalTime) * 100).toFixed(3);
     document.getElementById('percentage').textContent = `${progressPercentage}%`;
     
     // Update circular progress bar rotation
     const rotation = (360 * timeElapsed) / totalTime;
     document.getElementById('circle-progress').style.transform = `rotate(${rotation}deg)`;
-
-    // Change circle color from red to green based on time passed
-    const colorGradient = `conic-gradient(
-        red ${Math.min(progressPercentage, 25)}%,
-        yellow ${Math.min(progressPercentage, 50)}%,
-        green ${progressPercentage}%
-    )`;
-    document.querySelector('.circle').style.background = colorGradient;
 }
 
 // Update the timer every second
