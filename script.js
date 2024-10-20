@@ -10,7 +10,7 @@ function updateTimer() {
 
     if (now >= endDate) {
         document.getElementById('vacation-status').textContent = "Vacation has ended!";
-        document.getElementById('circle-progress').style.transform = 'rotate(180deg)';
+        document.getElementById('circle-progress').style.transform = 'rotate(360deg)';
         clearInterval(interval);
         return;
     } else if (now < startDate) {
@@ -43,7 +43,7 @@ function updateTimer() {
     const progressPercentage = ((timeElapsed / totalTime) * 100).toFixed(3);
     document.getElementById('percentage').textContent = `${progressPercentage}%`;
     
-    // Update circular progress bar rotation
+    // Update circular progress bar rotation (starting from right side)
     const rotation = (360 * timeElapsed) / totalTime;
     document.getElementById('circle-progress').style.transform = `rotate(${rotation}deg)`;
 }
