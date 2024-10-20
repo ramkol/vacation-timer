@@ -9,19 +9,21 @@
 <body>
     <div class="container">
         <h1>Vacation Countdown</h1>
-        <div id="timer">
-            <div><span id="days">0</span> Days</div>
-            <div><span id="hours">0</span> Hours</div>
-            <div><span id="minutes">0</span> Minutes</div>
-            <div><span id="seconds">0</span> Seconds</div>
+        <div class="circle-container">
+            <div class="circle">
+                <div id="circle-progress" class="circle-progress"></div>
+                <div class="circle-content">
+                    <div><span id="percentage">0%</span></div>
+                    <div><span id="days">0</span> Days</div>
+                    <div><span id="hours">0</span> Hours</div>
+                    <div><span id="minutes">0</span> Minutes</div>
+                    <div><span id="seconds">0</span> Seconds</div>
+                </div>
+            </div>
         </div>
         <div class="extra-info">
             <div>Time Passed: <span id="time-passed">0 hours, 0 minutes</span></div>
             <div>Time Remaining: <span id="time-remaining">0 hours, 0 minutes</span></div>
-            <div>Percentage Passed: <span id="percentage">0%</span></div>
-        </div>
-        <div class="progress-bar">
-            <div id="progress" class="progress"></div>
         </div>
         <p id="vacation-status"></p>
     </div>
